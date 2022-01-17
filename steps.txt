@@ -1,0 +1,10 @@
+Step 1: Create the object file :
+    gcc -fno-asynchronous-unwind-tables -s -c -o hello.o hello.c
+
+Step 2: Disassemble the object file
+    objconv -fnasm hello.o   #this creates hello.asm
+
+Step 4: Assemble the asm code with nasm:
+    nasm -f elf hello.asm #This creates a new hello.o, actually the same :) 
+    gcc hello.o -o hello   # this creates a binary hello, use gcc and no ld because of the call of external functions
+./hello   # output : hello world 
