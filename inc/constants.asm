@@ -28,10 +28,16 @@ O_SYNC      equ 1052672
 O_PATH      equ 2097152
 O_TMPFILE   equ 4259840
  
-O_LARGEFILE equ 0
- 
+ O_LARGEFILE equ 0
+
 SYS_READ    equ 0
-SYS_WRITE   equ 1
+%ifidn __OUTPUT_FORMAT__, win64
+    %define SYS_WRITE 1
+%elifidn __OUTPUT_FORMAT__, elf64
+    %define SYS_WRITE 1
+%elifidn __OUTPUT_FORMAT__, macho64
+    %define SYS_WRITE 0x2000004
+%endif
 SYS_OPEN    equ 2
 SYS_CLOSE   equ 3
 SYS_STAT    equ 4
@@ -90,7 +96,13 @@ SYS_CLONE   equ 56
 SYS_FORK    equ 57
 SYS_VFORK   equ 58
 SYS_EXECVE  equ 59
-SYS_EXIT    equ 60
+%ifidn __OUTPUT_FORMAT__, win64
+    %define SYS_EXIT 60
+%elifidn __OUTPUT_FORMAT__, elf64
+    %define SYS_EXIT 60
+%elifidn __OUTPUT_FORMAT__, macho64
+    %define SYS_EXIT 0x2000001
+%endif
 SYS_WAIT4   equ 61
 SYS_KILL    equ 62
 SYS_UNAME   equ 63
