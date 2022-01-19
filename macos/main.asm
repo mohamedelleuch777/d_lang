@@ -1,5 +1,4 @@
-%include "constants.asm"
-%include "system.inc"
+%include "xilyor.inc"
 
 
 
@@ -10,15 +9,6 @@ section .data
     int_1 dq 48
     CR db 10, 0
     
-    %ifidn __OUTPUT_FORMAT__, win64
-        text1 db "a message from windows.", 10
-    %elifidn __OUTPUT_FORMAT__, elf64
-        text1 db "a message from linux.", 10
-    %elifidn __OUTPUT_FORMAT__, macho64
-        text1 db "a message from macos.", 10
-    %endif
-    ;text1 db __OUTPUT_FORMAT__
-
 
 section .text
     global _main
@@ -28,12 +18,8 @@ _main:
 
     mov     rax, SYS_WRITE
     mov     rdi, STDOUT
-    mov     rsi, text1
+    mov     rsi, text
     mov     rdx, 22
     syscall
  
-    ;exit 0
-
-    mov rax, SYS_EXIT
-    mov rdi, 0
-    syscall
+    exit 0
