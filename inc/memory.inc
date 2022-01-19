@@ -14,5 +14,5 @@
     mov edi, -1     ; fd = -1
     xor ebp, ebp    ; offset = 0 (4096*0)
     int $80         ; make call
-    mov [%1], rax ; get ptr from rax to variable
+    mov qword [%1], rax ; get ptr from rax to variable
 %endmacro

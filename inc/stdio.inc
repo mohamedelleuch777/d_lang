@@ -66,7 +66,7 @@ section .text
 
 
 %macro print_number 1
-    mov rax, [%1]
+    mov qword rax, [%1]
     ;INPUTS:
     ; rax as pointer to sring
     ;RESULT:
@@ -88,8 +88,8 @@ section .text
         mov rcx, final_number
     %%_reverse_char_order:
         dec rbx
-        mov al, [rbx]
-        mov [rcx], al
+        mov byte al, [rbx]
+        mov byte [rcx], al
         inc rcx
         cmp rbx, number
         jge %%_reverse_char_order
@@ -101,7 +101,7 @@ section .text
         %%_print_loop:
             inc rax
             inc rbx
-            mov cl, [rax]
+            mov byte cl, [rax]
             cmp cl, 0
             jne %%_print_loop
 
@@ -125,7 +125,7 @@ section .text
         %%_print_loop:
             inc rax
             inc rbx
-            mov cl, [rax]
+            mov byte cl, [rax]
             cmp cl, 0
             jne %%_print_loop
 
@@ -135,3 +135,15 @@ section .text
         mov rdx, rbx
         syscall
 %endmacro
+
+
+; MACOS X STDOUT WRITE
+; mov rax, 0x2000004             ; write
+; mov rdi, 1                     ; stdout
+; mov rsi, msg                   ; msg text
+; mov rdx, msg.len               ; msg length
+; syscall
+
+; mov rax, 0x2000001             ; exit
+; mov rdi, 0
+; syscall

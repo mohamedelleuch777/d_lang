@@ -8,8 +8,10 @@ section .data
     CR db 10, 0
 
 section .text
+    global _main
     global _start
  
+_main:
 _start:
     ; print text
     ; malloc stringPtr, 100
