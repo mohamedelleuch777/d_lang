@@ -35,7 +35,7 @@ compile () {
     read -p "Do you like to run the compiled program? (y/n)?" choice
     case "$choice" in 
     y|Y ) execute;;
-    n|N ) ls;;
+    # n|N ) ls;;
     # * ) echo "invalid";;
     esac
 }
