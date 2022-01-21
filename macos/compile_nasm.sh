@@ -6,7 +6,7 @@ NASM=$4
 LD=$5
 
 FULL_PATH=${PATH}/macos/${FILE_NAME}
-XILYOR_OBJ=${PATH}/macos/xilyor.o
+XILYOR_OBJ=${PATH}/xilyor/xilyor.o
 
 println() {
     MSG=$1

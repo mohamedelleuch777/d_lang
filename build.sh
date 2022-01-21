@@ -7,6 +7,7 @@ NASM=$(which nasm)
 LD=$(which ld)
 MSG1='Starting_the_program...'
 MSG2='Program_exited.'
+BUILD=$2
 
 println() {
     MSG=$1
@@ -26,9 +27,9 @@ execute() {
     println ${MSG2}
 }
 
+
 compile () {
     path1=$(pwd)
-    echo ${path1}
     cd ${DIRECTORY}
     ./compile_nasm.sh ${FILE_NAME} ${path1} ${OS_NAME} ${NASM} ${LD}
 
@@ -39,6 +40,21 @@ compile () {
     # * ) echo "invalid";;
     esac
 }
+
+
+compileC () {
+    pathC=$(pwd)
+    cd xilyor/
+    gcc xilyor.c -c
+    cd ..
+}
+
+# here start script
+case "$BUILD" in 
+    -b|-B|-build|-BUILD|-Build ) compileC;;
+    # n|N ) ls;;
+    # * ) echo "invalid";;
+esac
 
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
