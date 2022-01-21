@@ -1,9 +1,42 @@
+
+extern _memAlloc
+
+
+;####################################################################################
+;####################################################################################
+;###################################### MALLOC ######################################
+;####################################################################################
+;####################################################################################
+
+; params:
+;   malloc returnedPtr, size
+%macro malloc 2
+    mov     rdi, %2 ; variable size (memory length to allocate)
+    call    _memAlloc
+    mov     [rel %1], rax
+%endmacro
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ;INPUTS:
 ; ecx: length of allocated memory
 ;RESULT:
 ; return in rax a pointer to the allocated memory
 
-%macro malloc 2
+%macro mallocASM 2
     mov eax, 192    ; mmap2
     xor ebx, ebx    ; addr = NULL
     ;mov ecx, 4096   ; len = 4096
@@ -16,3 +49,4 @@
     int $80         ; make call
     mov qword [%1], rax ; get ptr from rax to variable
 %endmacro
+
