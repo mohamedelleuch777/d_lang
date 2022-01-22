@@ -1,7 +1,15 @@
 #include <stdio.h>
 
-void write(const char* format, char* str) {
-    printf(format, str);
+void writeStr(char* str) {
+    printf("%s", str);
+}
+
+void writeInt(long val) {
+    printf("%ld", val);
+}
+
+void writeFloat(double val) {
+    printf("%+.6f", val);
 }
 
 int read(char* str, int length) {

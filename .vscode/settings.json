@@ -3,6 +3,10 @@
         "cstdlib": "c",
         "locale": "c",
         "ostream": "c",
-        "new": "c"
+        "new": "c",
+        "__string": "c",
+        "cstring": "c",
+        "memory": "c",
+        "utility": "c"
     }
 }

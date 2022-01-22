@@ -1,7 +1,10 @@
 
-extern _write
-extern _read
 
+
+extern _writeStr
+extern _writeInt
+extern _writeFloat
+extern _read
 
 
 ;####################################################################################
@@ -12,10 +15,54 @@ extern _read
 
 ; params:
 ;   write varFormat, string
+;INPUTS:
+; @param: string variable 
+;RESULT:
+; print string to stdio
 %macro write 2
+    mov byte al, [rel %1]
+    ; case 's':
+    cmp al, 's'
+    jne %%_skip_string
+    mov byte [rel else], 0xFF
+    write_string %2
+    %%_skip_string:
+    ; case 'i':
+    cmp al, 'i'
+    jne %%_skip_integer
+    mov byte [rel else], 0xFF
+    write_integer %2
+    %%_skip_integer:
+    ; case 'f':
+    cmp al, 'f'
+    jne %%_skip_float
+    mov byte [rel else], 0xFF
+    write_float %2
+    %%_skip_float:
+    ; else:
+    cmp byte [rel else], 0xFF
+    je %%_skip_else
+    write_string error1
+    %%_skip_else:
+    mov byte [rel else], 0x00
+    
+%endmacro
+
+
+
+%macro write_string 1
     mov     qword rdi, %1 ; arg 1: format => %s %d %i %f ...
-    mov     qword rsi, %2 ; arg 2: text
-    call    _write
+    call    _writeStr
+%endmacro
+
+%macro write_integer 1
+    mov     qword rdi, %1 ; arg 1: format => %s %d %i %f ...
+    call    _writeInt
+%endmacro
+
+%macro write_float 1
+    mov     qword rdi, %1 ; arg 1: format => %s %d %i %f ...
+    call    _writeFloat
 %endmacro
 
 
@@ -48,42 +95,6 @@ extern _read
 
 
 
-section .bss
-    number resb 100
-    final_number resb 100
-    else resb 1
-
-section .text
-    error1 db "first argument passed is an invalid format",10,0
-
-;INPUTS:
-; @param: string variable 
-;RESULT:
-; print string to stdio
-%macro print 2
-    mov al, %1
-    ; case 's':
-    cmp byte al, 's'
-    jne %%_skip_string
-    mov byte [else], 0xFF
-    print_core %2
-    %%_skip_string:
-    ; case 'i':
-    cmp byte al, 'i'
-    jne %%_skip_integer
-    mov byte [else], 0xFF
-    print_number %2
-    %%_skip_integer:
-    ; else:
-    cmp byte [else], 0xFF
-    je %%_skip_else
-    print_core error1
-    %%_skip_else:
-    mov byte [else], 0
-    
-    
-    
-%endmacro
 
 
 ;INPUTS:
@@ -184,13 +195,14 @@ section .text
 %endmacro
 
 
-; MACOS X STDOUT WRITE
-; mov rax, 0x2000004             ; write
-; mov rdi, 1                     ; stdout
-; mov rsi, msg                   ; msg text
-; mov rdx, msg.len               ; msg length
-; syscall
 
-; mov rax, 0x2000001             ; exit
-; mov rdi, 0
-; syscall
+
+
+
+section .bss
+    number resb 100
+    final_number resb 100
+    else resb 1
+
+section .text
+    error1 db "first argument passed is an invalid format",10,0
