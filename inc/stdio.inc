@@ -20,32 +20,61 @@ extern _read
 ;RESULT:
 ; print string to stdio
 %macro write 2
-    mov byte al, [rel %1]
-    ; case 's':
+    mov al, %1
+    ; ##### case 's':
+
     cmp al, 's'
     jne %%_skip_string
     mov byte [rel else], 0xFF
     write_string %2
     %%_skip_string:
-    ; case 'i':
+
+    ; ##### case 'i':
     cmp al, 'i'
     jne %%_skip_integer
     mov byte [rel else], 0xFF
     write_integer %2
     %%_skip_integer:
-    ; case 'f':
+
+    ; ##### case 'f':
     cmp al, 'f'
     jne %%_skip_float
     mov byte [rel else], 0xFF
     write_float %2
     %%_skip_float:
-    ; else:
+
+    ; ##### case 'a':
+    cmp al, 'a'
+    jne %%_skip_address
+    mov byte [rel else], 0xFF
+    write_integer %2
+    %%_skip_address:
+
+    ; ##### else:
     cmp byte [rel else], 0xFF
     je %%_skip_else
     write_string error1
     %%_skip_else:
     mov byte [rel else], 0x00
     
+%endmacro
+
+
+;####################################################################################
+;####################################################################################
+;######################################## WRITE #####################################
+;####################################################################################
+;####################################################################################
+
+; params:
+;   write varFormat, string
+;INPUTS:
+; @param: string variable 
+;RESULT:
+; print string to stdio
+%macro writeln 2
+    write %1, %2
+    write 's', varCr 
 %endmacro
 
 
@@ -206,3 +235,5 @@ section .bss
 
 section .text
     error1 db "first argument passed is an invalid format",10,0
+    varCr  db CR, 0
+

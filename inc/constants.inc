@@ -1,11 +1,16 @@
 
+
+
+
+
 STDIN_FILENO    equ 0
 STDOUT_FILENO   equ 1
 STDERR_FILENO   equ 2
 STDIN   equ 0
 STDOUT  equ 1
 STDERR  equ 2
- 
+
+
 O_RDONLY    equ 0
 O_WRONLY    equ 1
 O_RDWR      equ 2
@@ -33,10 +38,13 @@ O_TMPFILE   equ 4259840
 SYS_READ    equ 0
 %ifidn __OUTPUT_FORMAT__, win64
     %define SYS_WRITE 1
+    CR      equ 10 ,13
 %elifidn __OUTPUT_FORMAT__, elf64
     %define SYS_WRITE 1
+    CR      equ 10 
 %elifidn __OUTPUT_FORMAT__, macho64
     %define SYS_WRITE 0x2000004
+    CR      equ 10 
 %endif
 SYS_OPEN    equ 2
 SYS_CLOSE   equ 3
