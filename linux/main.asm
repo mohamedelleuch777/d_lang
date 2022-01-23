@@ -4,10 +4,7 @@
 extern      printf
 extern      sayeb
 
-          global    entryAsm
-
-          section   .text
-entryAsm:   
+PROGRAM_START
 ; push    rbp         ; set up stack frame
 ;                         ; here we are saving the _main base pointer
 ;     mov     rbp, rsp    ; creating a new base stack by moving the 
@@ -24,9 +21,8 @@ entryAsm:
             mov       rsi, message1            ; address of string to output
             mov       rdx, 13                 ; number of bytes
             syscall                           ; invoke operating system to do the write
-            mov       rax, 60                 ; system call for exit
-            xor       rdi, rdi                ; exit code 0
-            syscall                           ; invoke operating system to exit
+
+PROGRAM_END 0
 
 section   .data
 message1:  db        "Hello, World", 10, 0      ; note the newline at the end
