@@ -22,7 +22,7 @@ print() {
 execute() {
     println ${MSG1}
     # sleep 3
-    .${path1}/${DIRECTORY}/${FILE_NAME}
+    .${path1}/${FILE_NAME}
     # sleep 3
     println ${MSG2}
 }
