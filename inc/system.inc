@@ -9,10 +9,10 @@
 %macro PROGRAM_START 0
 
 section .text
-    global _main
-    global _start
+    global main
+    ;global main ; for macos
     
-_main:
+main:
     ; C equivalent: function declaration and opening curley bracket
     ; of the beginning of the function:
     ; void main () {
