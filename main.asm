@@ -1,4 +1,10 @@
-%include "xilyor.inc"
+%ifidn __OUTPUT_FORMAT__, win64
+
+%elifidn __OUTPUT_FORMAT__, elf64
+    %include "../inc/xilyor.inc"
+%elifidn __OUTPUT_FORMAT__, macho64
+    %include "xilyor.inc"
+%endif
 
 extern _printf
 extern _malloc
