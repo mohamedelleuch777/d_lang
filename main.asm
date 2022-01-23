@@ -16,6 +16,7 @@ section .data
     joke db "nesi l bera7 wommelih", 10, 0
     num dd 1234567890
     format db "%s", 0
+    format_scanf db "%s", 0
     stringPtr dq 0 ; 64bit size pointer
     ; var int_1 integer
     int_1 dq 48
@@ -24,21 +25,42 @@ section .data
 
 section .bss
     testPtr resq 1
+    stdin resq 20
+    str1 resq 30
 
 ;RDI, RSI, RDX, RCX, R8, and R9 for the first 6 arguments
     
  PROGRAM_START
     
-    ;write format, text
-    ;malloc testPtr, 4096
-    mov     qword rdi, 4096
-    call    malloc
-    mov     [rel testPtr], rax
-    ;read testPtr, 4096
-    ;write format, testPtr
+    
+    ; printf
     mov     qword rdi, format
-    mov     qword rsi, joke
-    call    printf
+    mov     qword rsi, text
+    call    c_printf
+
+    ; malloc
+    mov     qword rdi, 30
+    call    c_malloc
+    mov     [rel str1], rax
+
+    ; scanf
+    mov     qword rdi, format_scanf
+    mov     qword rsi, str1
+    call    c_scanf
+
+    ; ; gets
+    ; mov     qword rdi, str1
+    ; call    c_gets
+    
+    ; printf
+    mov     qword rdi, format
+    mov     qword rsi, str1
+    call    c_printf
+    
+    ; printf
+    mov     qword rdi, format
+    mov     qword rsi, CR
+    call    c_printf
 
 
 
