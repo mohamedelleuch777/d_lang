@@ -14,7 +14,6 @@ PROGRAM_START
     mov     qword rsi, message2 ; arg 2: text
             call        printf
 
-            call        sayeb
             ; write 's', message
             mov       rax, 1                  ; system call for write
             mov       rdi, 1                  ; file handle 1 is stdout

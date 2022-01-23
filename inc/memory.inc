@@ -10,7 +10,7 @@ extern _memAlloc
 
 ; params:
 ;   malloc returnedPtr, size
-%macro malloc 2
+%macro malloc2 2
     mov     rdi, %2 ; variable size (memory length to allocate)
     call    _memAlloc
     mov     [rel %1], rax

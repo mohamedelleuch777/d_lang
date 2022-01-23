@@ -6,8 +6,8 @@
     %include "xilyor.inc"
 %endif
 
-extern _printf
-extern _malloc
+extern printf
+extern malloc
 
 
 section .data
@@ -29,16 +29,16 @@ section .bss
     
  PROGRAM_START
     
-    write format, text
+    ;write format, text
     ;malloc testPtr, 4096
     mov     qword rdi, 4096
-    call    _malloc
+    call    malloc
     mov     [rel testPtr], rax
-    read testPtr, 4096
-    write format, testPtr
+    ;read testPtr, 4096
+    ;write format, testPtr
     mov     qword rdi, format
     mov     qword rsi, joke
-    call _printf
+    call    printf
 
 
 
