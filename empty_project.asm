@@ -6,9 +6,6 @@
     %include "xilyor.inc"
 %endif
 
-extern printf
-extern malloc
-
 
 section .data
 
