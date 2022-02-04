@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <SDL/SDL.h>
 
 void write(const char* format, char* str) {
     printf(format, str);
@@ -10,3 +11,4 @@ int read(char* str, int length) {
     }
     return 1;
 }
+
