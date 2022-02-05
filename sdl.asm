@@ -6,10 +6,14 @@
     %include "xilyor.inc"
 %endif
 
-;extern _mySDL_Init
+extern _SDL_Init
+extern _mySDL_Init
+extern _write
 
 section .data
 
+    text db "Hello, World! hahaha", 10, 0
+    format db "%s", 0
 
 
 section .bss
@@ -20,9 +24,22 @@ section .bss
  PROGRAM_START
     
 
-push 0x20
-;call _mySDL_Init
+
     
+    ; printf
+    mov     qword rdi, format
+    mov     qword rsi, text
+    call    _write
+
+
+push 0xFFFF
+mov rdi, 0xFFFF
+call _SDL_Init
+    
+    ; printf
+    mov     qword rdi, format
+    mov     qword rsi, text
+    call    c_printf
 
 
 
