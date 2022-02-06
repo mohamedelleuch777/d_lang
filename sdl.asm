@@ -60,12 +60,19 @@ SDL_Event           resb        56
 
     window_was_created:
 
+    mov     qword rdi, 4096
+    call    _malloc
+    mov     [rel SDL_Event], rax
+
     while:
     cmp qword [rel isRunning], 0
     je  exit_program
 
+    mov  rdi, SDL_Event
     call SDL_PollEvent
-    mov [rel SDL_Event], rax
+
+    cmp word [rel SDL_Event], SDL_QUIT
+    je  exit_program
 
 
 

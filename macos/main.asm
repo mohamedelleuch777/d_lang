@@ -27,13 +27,6 @@ section .bss
     
  PROGRAM_START
     
-<<<<<<< HEAD
-    write 's', text
-    ;writeln 'i', 67832
-    malloc testPtr, 4096
-    malloc boufa, 4096
-    read num, 4096
-=======
     write format, text
     ;malloc testPtr, 4096
     mov     qword rdi, 4096
@@ -46,7 +39,6 @@ section .bss
     call _printf
 
 
->>>>>>> test-sdl
 
     ;memset boufa, 0x0, 4096
     memcpy boufa, num, 3
