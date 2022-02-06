@@ -71,7 +71,7 @@ SDL_Event           resb        56
     mov  rdi, SDL_Event
     call SDL_PollEvent
 
-    cmp World [rel SDL_Event], SDL_QUIT
+    cmp word [rel SDL_Event], SDL_QUIT
     je  exit_program
 
 
