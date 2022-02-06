@@ -41,11 +41,11 @@ SDL_Event           resb        56
     sdl_was_initialized:
 
     mov rdi, window_title
-    mov rsi, 0x1FFF0000 ; SDL_WINDOWPOS_UNDEFINED
-    mov rdx, 0x1FFF0000 ; SDL_WINDOWPOS_UNDEFINED
+    mov rsi, SDL_WINDOWPOS_UNDEFINED
+    mov rdx, SDL_WINDOWPOS_UNDEFINED
     mov rcx, 640
     mov r8, 480
-    mov r9, 0x00000002 ; SDL_WINDOW_OPENGL
+    mov r9, (SDL_WINDOW_SHOWN|SDL_WINDOW_RESIZABLE)
     call SDL_CreateWindow
     mov [rel screen], rax
     cmp rax, 0
