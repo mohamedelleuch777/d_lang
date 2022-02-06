@@ -22,7 +22,7 @@ print() {
 execute() {
     println ${MSG1}
     # sleep 3
-    ./${FILE_NAME}
+    .${path1}/${FILE_NAME}
     # sleep 3
     println ${MSG2}
 }
@@ -45,6 +45,7 @@ compile () {
 compileC () {
     pathC=$(pwd)
     cd xilyor/
+    gcc linux.c -c
     gcc xilyor.c -c
     cd ..
 }
@@ -60,6 +61,7 @@ esac
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
         OS_NAME="linux"
         DIRECTORY="linux"
+        compile
 elif [[ "$OSTYPE" == "darwin"* ]]; then
         OS_NAME="darwin"
         DIRECTORY="macos"
@@ -67,6 +69,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 else
         OS_NAME="win32"
         DIRECTORY="win32"
+        compile
 fi
 
 

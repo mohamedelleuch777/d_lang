@@ -18,3 +18,4 @@ int read(char* str, int length) {
     }
     return 1;
 }
+
