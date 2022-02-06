@@ -21,4 +21,4 @@ print() {
 
 cd ..
 $NASM -f macho64 ${FULL_PATH}.asm -i${PATH}/inc
-$LD ${FULL_PATH}.o ${XILYOR_OBJ} ${SDL2_OBJ} -o  ${FILE_NAME} -macosx_version_min 11.0 -L /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib -lSystem -no_pie  -F/usr/local/lib -lSDL2 #-F/Library/Frameworks -framework SDL2 #-framework Cocoa
+$LD ${FULL_PATH}.o ${XILYOR_OBJ} -o  ${FILE_NAME} -macosx_version_min 11.0 -L /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib -lSystem -no_pie  -F/usr/local/lib -lSDL2

@@ -1,0 +1,5 @@
+*.o
+linux/*.o
+macos/*.o
+win/*.o
+win/*.obj
