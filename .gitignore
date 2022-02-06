@@ -3,3 +3,5 @@ linux/*.o
 macos/*.o
 win/*.o
 win/*.obj
+xilyor/*.o
+xilyor/*.obj
